@@ -38,7 +38,6 @@ def _add_argparser_args(argparser: ArgumentParser):
 
         --increment
             Can be any of the following
-                Integer (this is whatever the lowest form of time tracking cron has available. Seconds most likely)
                 Integer followed by specifying character (EG 4D which is 4 days) Note: char is case sensitive
                     - Valid chars
                     - S (seconds)
@@ -72,7 +71,7 @@ def _add_argparser_args(argparser: ArgumentParser):
         help=textwrap.dedent('''
         Deletes job associated with the provided "job" id or name. To get a job id, run "list" without any parameters
 
-        Can be used in conjuction with
+        Can be used in conjuction with the following optional arguments
         --yes
             If provided, this prevents a prompt for verification of deletion
         --all
@@ -188,7 +187,6 @@ def create(
     :param source: Can be either a file or directory
     :param destination: Must be a directory. If the directory does not exist, it will be created
     :param increment: Can be any of the following
-        Integer (this is whatever the lowest form of time tracking cron has available. Seconds most likely)
         Integer followed by specifying character (EG 4D which is 4 days) Note: char is case sensitive
             - Valid chars
             - S (seconds)
