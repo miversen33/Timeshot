@@ -278,4 +278,10 @@ _add_argparser_args(argparser)
 
 if __name__ == "__main__":
     args = argparser.parse_args()
-    pass
+    error, error_code = _parse_args(args)
+    if error:
+        if error_code == 1:
+            print(f'{error}\n\n{argparser.format_help()}')
+        else:
+            print(f'{error}\n')
+        sys.exit(error_code)
