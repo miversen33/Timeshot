@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 from multiprocessing import Pipe
 from multiprocessing.connection import Connection
-from argparse import ArgumentParser, RawTextHelpFormatter
+from argparse import ArgumentParser, RawTextHelpFormatter, Namespace
+import sys
 import textwrap
+import os.path
+from os.path import exists
 
 FORMAT_STRING = "STRING"
 FORMAT_JSON = "JSON"
