@@ -4,6 +4,10 @@ from multiprocessing.connection import Connection
 
 FORMAT_STRING = "STRING"
 FORMAT_JSON = "JSON"
+
+COMPRESS_TYPE_TARGZ = "TAR.GZ"
+COMPRESS_TYPE_ZIP = "ZIP"
+COMPRESS_TYPE_NONE = None
 #Unsupported currently
 #FORMAT_XML = "XML"
 def backup(job: int) -> Connection:
@@ -39,10 +43,10 @@ def list(job: int=-1, format: str=FORMAT_STRING) -> str:
 
 def configure(job: int, **kwargs) -> None:
     '''
-    Configures any option on a job.
+    Configures any option on a job. All options listed in "create" can be modified via configure
 
     :param job: id associated with the job to run. To get this id, run the "list" command
-    :param kwargs: PENDING LISTING
+    :param kwargs: See :create: for more details on kwargs
     :return None:
     :potential_exceptions: Unknown at this time
     '''
@@ -58,7 +62,13 @@ def delete(job: int) -> None:
     '''
     pass
 
-def create(**kwargs) -> int:
+def create(
+    source: str,
+    destination: str,
+    increment: str,
+    save: str,
+    exclude: str = "",
+    compress_type: str = COMPRESS_TYPE_TARGZ) -> int:
     '''
     Creates a new job
 
