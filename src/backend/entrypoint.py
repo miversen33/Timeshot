@@ -130,12 +130,10 @@ def backup(job_int: int=-1, job_name: str="") -> Connection:
     '''
     return None
 
-def restore(job_id: int=-1, job_name: str="", restore_point: int=None) -> Connection:
+def restore(restore_point: int) -> Connection:
     '''
-    Runs the restore job associated with the provided "job" id
+    Runs the restore job for the provided restore_point
 
-    :param job_id (optional): id associated with the job to restore. Either this or job_name must be provided. To get this id, run the "list" command
-    :param job_name (optional): name of job to restore. Either this or job_id must be provided
     :param restore_point: id of the point to restore to. To find available restore points for your job, run "list" with the provided job id/name
     :return Connection: returns the child connection of a pipe that the function creates when it drops to a subprocess to begin the restore process.
     :potential_exceptions: Unknown at this time
