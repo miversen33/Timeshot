@@ -78,12 +78,7 @@ def _add_argparser_args(argparser: ArgumentParser):
             If provided, this will delete the job and all backups. By default this is set to false
         ''')
         )
-    argparser.add_argument('-o', '--config', 
-        help=textwrap.dedent('''
-        Configures any option on a job. Jobs can be provided via their id or name. All options listed in "create" can be modified via configure. For more details, check out --create
-        ''')
-        )
-    argparser.add_argument('-l', '--list', 
+    argparser.add_argument('-l', '--list', default=False, action="store_true",
         help=textwrap.dedent(
         '''
         Lists all jobs and associated backups with those jobs
@@ -98,7 +93,19 @@ def _add_argparser_args(argparser: ArgumentParser):
                     - JSON
         ''')
         )
-    argparser.add_argument('--name', default=None, action="store", help="Used in conjunction with --config or --create")
+    argparser.add_argument('-o', '--config', metavar="id/name",
+        help=textwrap.dedent('''
+        Configures any option on a job. Jobs can be provided via their id or name. All options listed in "create" can be modified via configure. For more details, check out --create
+        
+        Additionally, you can provide the flag --name to set a new unique name for this job
+
+        --create
+            Allows override of name of job
+        ''')
+        )
+    argparser.add_argument('-r', '--restore', metavar="restore_id",
+        help='Restores the job to an earlier point. To get a list of restore points, checkout --list with your jobs name/id')
+    argparser.add_argument('--name', default=None, action="store", help="Used in conjunction with --config")
     argparser.add_argument('--source', default=None, action="store", help="Used in conjunction with --config or --create")
     argparser.add_argument('--destination', default=None, action="store", help="Used in conjunction with --config or --create")
     argparser.add_argument('--increment', default=None, action="store", help="Used in conjunction with --config or --create")
