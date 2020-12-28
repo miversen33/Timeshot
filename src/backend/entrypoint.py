@@ -29,8 +29,6 @@ def _add_argparser_args(argparser: ArgumentParser):
     argparser.add_argument('-c', '--create', metavar="name",
         help=textwrap.dedent('''
         Creates a new job. Requires the following flags
-        --name
-            This must be a unique name
 
         --source
             Can be either a file or directory
