@@ -245,9 +245,29 @@ def prepare_create(args: dict) -> tuple(str, int):
     
     return error_string
 
-argparser = ArgumentParser(description='''
-    Timeshot Interface to manage backups and restorations of linux machines
-    ''',
+def _parse_args(args: Namespace) -> tuple(str, int):
+    '''
+    Parses the args available. Performs checks to ensure that all required arguments are found.
+    
+    :param argparser: The ar
+    :return error: If an error is found, it will be returned here. Expect an empty string (which will fail Falsey checks) if all goes well
+    :return error_code: The associated error code with the error_string. If there is no error, you will get 0
+    '''
+    args = {
+        k:v for k,v in args._get_kwargs()
+    }
+    required_keys = ['backup', 'restore', 'list', 'config', 'delete', 'create']
+    found_args = {k:v for k,v in args.items() if k in required_keys and v}
+    if len(found_args) == 0:
+        return f'No valid arguments found. Please use select one of the following arguments: {" ".join([f"--{k}" for k in required_keys])}.', 1
+    if len(found_args) > 1:
+        return f'Found the following arguments: {" ".join([f"--{k}={v}" for k,v in found_args.items()])}. Please ensure you are only using one of these arguments.', 1
+
+    if args['create']:
+        error, error_code = prepare_create(args)
+        if error:
+            return error, error_code
+    return "", 0
     formatter_class=RawTextHelpFormatter)
 _add_argparser_args(argparser)
 
