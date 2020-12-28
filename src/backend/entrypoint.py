@@ -24,9 +24,9 @@ def _add_argparser_args(argparser: ArgumentParser):
     :potential_exceptions: Unknown at this time
     '''
 
-    argparser.add_argument('-b', '--backup', 
+    argparser.add_argument('-b', '--backup', metavar="id/name", 
         help='Runs the backup job associated with the provided "job" id or name. To get a job id, run "list" without any parameters')
-    argparser.add_argument('-c', '--create', action="store_true",
+    argparser.add_argument('-c', '--create', metavar="name",
         help=textwrap.dedent('''
         Creates a new job. Requires the following flags
         --name
@@ -70,7 +70,7 @@ def _add_argparser_args(argparser: ArgumentParser):
             directory/files that should be excluded. Can be one string delimited with colons (EG --exclude /dir1:/dir2), or can be included multiple times (EG --exclude /dir1 --exclude /dir2)
         ''')
         )
-    argparser.add_argument('-d', '--delete', 
+    argparser.add_argument('-d', '--delete', metavar="id/name",
         help=textwrap.dedent('''
         Deletes job associated with the provided "job" id or name. To get a job id, run "list" without any parameters
 
