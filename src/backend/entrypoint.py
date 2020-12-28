@@ -116,6 +116,7 @@ def _add_argparser_args(argparser: ArgumentParser):
     argparser.add_argument('--all', default=False, action="store_true", help="Used in conjunction with --delete")
     argparser.add_argument('--job', default='', action="store", help="Used in conjunction with --list")
     argparser.add_argument('--format', default='', action="store", help="Used in conjunction with --list")
+    argparser.add_argument('-v', '--verbose', default=False, action="store_true", help="Increases verbosity of program")
     argparser.add_argument('--version', default=False, action="store_true", help="Prints current version")
 
 def backup(job_int: int=-1, job_name: str="") -> Connection:
