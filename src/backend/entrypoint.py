@@ -271,6 +271,8 @@ def _parse_args(args: Namespace) -> tuple(str, int):
         if error:
             return error, error_code
     return "", 0
+
+argparser = ArgumentParser(description='''Timeshot Interface to manage backups and restorations of linux machines''',
     formatter_class=RawTextHelpFormatter)
 _add_argparser_args(argparser)
 
