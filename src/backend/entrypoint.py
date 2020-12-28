@@ -215,10 +215,35 @@ def create(
             This will not compress the incremental snapshots. Not recommended
         :Default "TAR.GZ":
     :return int: New job's id
+
+    :related prepare_create:
     :potential_exceptions: Unknown at this time
     '''
     return -1
 
+
+def prepare_create(args: dict) -> tuple(str, int):
+    '''
+    Checks to ensure all required arguments are present for the create method to operate correctly
+
+    :param args: A dictionary of the parsed arguments from the argparser
+    :return error_string: An error string that indicates what information is missing
+    :return error_code: The associated error code with returned error_string 
+
+    :related create:
+    :potential_exceptions: Unknown at this time
+    '''
+    error_string = ''
+
+    required_keys = ['source', 'destination', 'increment', 'save_history']
+    missing_keys = {k:v for k,v in args.items() if k in required_keys and not v}
+    if len(missing_keys) > 0:
+        return f'Create used without the following arguments {" ".join([f"--{key}" for key in missing_keys])}', 1
+
+    if not exists(args['source']):
+        return f"Backup Source: {args['source']} does not exist.", 2
+    
+    return error_string
 
 argparser = ArgumentParser(description='''
     Timeshot Interface to manage backups and restorations of linux machines
