@@ -9,7 +9,7 @@ Entrypoint
   - format (see below for formats)
     - yaml
     - json
-    - csv (default, will be done via tabular data)
+    - csv (default)
 - configure (job)
 - delete (job)
   - If job is running currently, it is killed and the current partial backup is discarded
