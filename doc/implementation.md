@@ -2,14 +2,14 @@ Entrypoint
 - backup (job)
 - restore (job)
   - backup_id
-    - Required to tell restore _which_ backup needs to be redone
+    - Required to tell restore _which_ backup needs to be restored
 - list
   - job
     - optional. If provided, will only list backup information for this particular job
   - format (see below for formats)
     - yaml
     - json
-    - text (default, will be done via tabular data)
+    - csv (default, will be done via tabular data)
 - configure (job)
 - delete (job)
   - If job is running currently, it is killed and the current partial backup is discarded
@@ -43,6 +43,9 @@ Entrypoint
   - exclude
     - directory/files that should be excluded. Can be one string delimited with colons (EG --exclude /dir1:/dir2), or can be included multiple times (EG --exclude /dir1 --exclude /dir2)
   - compress-type
-    - default will be tar.gz
-      - Also will support zip (maybe rar?)
-    - Option None can be provided, this will not compress the incremental snapshots. Not recommended
+     - Valid options
+         - tar
+         - gz
+         - tar.gz
+         - zip 
+         - raw (uncompressed, Not recommended)
